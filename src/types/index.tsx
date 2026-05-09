@@ -3,7 +3,7 @@
 export interface UsePaginationInputProps {
     totalItems: number,
     itemsPerPage: number,
-    initialPage: number
+    initialPage?: number
 }
 
 export interface UsePaginationReturnProps {

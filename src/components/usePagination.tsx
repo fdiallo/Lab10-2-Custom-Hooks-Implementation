@@ -1,32 +1,48 @@
-import { useState } from "react";
-import type { UsePaginationInputProps, UsePaginationReturnProps } from "../types";
-
+import { useMemo, useState } from "react";
 
 function usePagination(
-    { totalItems, itemsPerPage, initialPage }: UsePaginationInputProps
-): UsePaginationReturnProps {
+    { totalItems, itemsPerPage, initialPage = 1 }
+): {
+    currentPage: number,
+    totalPages: number,
+    startIndex: number,
+    endIndex: number,
+    itemsOnCurrentPage: number,
+    setCurrentPage: (pageNumber: number) => void,
+    setPage: (pageNumber: number) => void,
+    nextPage: () => void,
+    prevPage: () => void,
+    canNextPage: Boolean,
+    canPrevPage: Boolean
+} {
 
-    const [currentPage, setCurrentPage] = useState(0)
-    const [totalPages, setTotalPages] = useState(0)
-    const [startIndex, setStartIndex] = useState(0)
-    const [endIndex, setEndIndex] = useState(0)
+    const [currentPage, setCurrentPage] = useState(initialPage)
+
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    const endIndex = currentPage * itemsPerPage;
+    const startIndex = endIndex - itemsPerPage;
+
     const [itemsOnCurrentPage, setItemsOnCurrentPage] = useState(0)
-    const [canNextPage, setCanNextPage] = useState(false)
-    const [canPrevPage, setCanPrevPage] = useState(false)
 
-    const setPage = (pageNumber: number) => { }
-    const nextPage = () => { }
-    const prevPage = () => { }
+    const canNextPage = currentPage === totalPages
+    const canPrevPage = currentPage === 1
+
+    // Navigation functions
+    const nextPage = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    };
+
+    const prevPage = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
 
     return (
 
         {
-            currentPage, totalPages, startIndex, endIndex,
-            itemsOnCurrentPage, setPage, nextPage, prevPage, canNextPage, canPrevPage
+            totalPages, nextPage, prevPage, canNextPage, canPrevPage
         }
-
     )
-
 
 }
 
