@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 function usePagination(
     { totalItems, itemsPerPage, initialPage = 1 }

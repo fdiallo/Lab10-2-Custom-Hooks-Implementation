@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useDebounce from "./useDebounce";
 
-
 function DebounceSearchDemo() {
     const [searchTerm, setSearchTerm] = useState("")
     const [stepValue, setStepValue] = useState(0)
@@ -26,16 +25,16 @@ function DebounceSearchDemo() {
             setStepValue((prev) => prev + 100)
         } else if (e.key === "ArrowDown") {
             e.preventDefault()
-            setStepValue((prev) => ((prev - 100) >= 0 ? prev - 100 : 0 )) // To prevent negative value
+            setStepValue((prev) => ((prev - 100) >= 0 ? prev - 100 : 0)) // To prevent negative value
         }
     }
 
     return (
-        <div style={{ justifyContent: "left",  alignItems: "left", padding: "20px" }}> <br/>
+        <div style={{ justifyContent: "left", alignItems: "left", padding: "20px" }}> <br />
             <h2>Debounce Search Demo</h2><br />
 
-            <span>Debounce Delay (ms): 
-                <input style={{ marginLeft: "10px" }} 
+            <span>Debounce Delay (ms):
+                <input style={{ marginLeft: "10px" }}
                     type="number"
                     value={stepValue}
                     onChange={handleStepChange}
@@ -44,8 +43,8 @@ function DebounceSearchDemo() {
                     min={0}
                 />
             </span><br />
-            
-             <br/><input
+
+            <br /><input
                 type="text"
                 placeholder="Type to search..."
                 value={searchTerm}
