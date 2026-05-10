@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PaginationDemo from "./components/PaginationDemo"
 import usePagination from "./components/usePagination";
+import DebounceSearchDemo from "./components/DebounceSearchDemo";
 
 function App() {
 
@@ -51,6 +52,9 @@ function App() {
         currentPage={currentPage}
         onPageChange={(page: number) => setCurrentPage(page)}
       />
+
+      <br /><hr /><br />
+      <DebounceSearchDemo/>
     </div>
   )
 }
